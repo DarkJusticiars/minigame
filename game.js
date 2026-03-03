@@ -1,5 +1,7 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
+const backgroundImage = new Image();
+backgroundImage.src = "background.png";
 
 // Create image object
 const playerImage = new Image();
@@ -62,6 +64,15 @@ function update() {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.drawImage(
+        backgroundImage,
+        0,
+        0,
+        canvas.width,
+        canvas.height + 10
+    );
+
 
     // Draw the player image
     ctx.drawImage(
