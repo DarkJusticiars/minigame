@@ -8,6 +8,11 @@ const playerImage = new Image();
 playerImage.src = "player.png";
 const obstacleImage = new Image();
 obstacleImage.src = "obstacle.png"
+const bgMusic = new Audio("THEME_SONG.m4a");
+bgMusic.loop = true;      
+bgMusic.volume = 0.4;
+let musicplaying = false;
+
 
 let player = {
     x: 50,
@@ -25,9 +30,9 @@ let obstacle = {
     height: 20
 };
 
-const gravity = 0.5;
+const gravity = 0.4;
 
-let gameSpeed = 5;
+let gameSpeed = 2.8;
 let score = 0;
 
 function gameLoop() {
@@ -37,7 +42,7 @@ function gameLoop() {
 }
 
 function update() {
-
+   
     score += 1;
     gameSpeed += 0.001;
 
@@ -70,7 +75,7 @@ function update() {
 
         obstacle.x = 600;
         score = 0;
-        gameSpeed = 5;
+        gameSpeed = 2.8;
     }
 }
 
@@ -86,8 +91,8 @@ function draw() {
         canvas.height + 10
     );
 
-    ctx.fillStyle = "white";
-    ctx.font = "20px Arial";
+    ctx.fillStyle = "black";
+    ctx.font = "30px Arial";
     ctx.fillText("Score: " + Math.floor(score), 20, 30);
 
     // Player image
@@ -115,8 +120,14 @@ playerImage.onload = function () {
 };
 
 document.addEventListener("keydown", function (e) {
-    if (e.code === "Space" && !player.jumping) {
-        player.velocityY = -10;
-        player.jumping = true;
+    if (e.code === "Space") {
+         if(!musicplaying){
+         bgMusic.play();
+         musicplaying = true;}
+        if (!player.jumping) {
+            player.velocityY = -10;
+            player.jumping = true;
+        }
     }
+   
 });
